@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: guidance_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: student_guidance
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: guidance_redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+
+  web:
+    build: .
+    container_name: student_guidance_app
+    restart: unless-stopped
+    #command: python student_guidance_system/manage.py runserver 0.0.0.0:9007
+    environment:
+      DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: student_guidance
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    ports:
+      - "9007:9007"
+    # No volumes here for now – uses the code built into the image
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+volumes:
+  postgres_data:
