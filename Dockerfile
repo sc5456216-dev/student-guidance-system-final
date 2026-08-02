@@ -3,5 +3,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-EXPOSE 9007
-CMD ["python", "manage.py", "runserver", "0.0.0.0:9007"]
+
+# Run migrations and collect static files before starting the server
+RUN python manage.py collectstatic --noinput
+RUN python manage.py migrate --noinput
+
+EXPOSE 8000
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "student_guidance_system.wsgi:application"]
