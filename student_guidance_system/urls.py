@@ -44,7 +44,7 @@ from counseling.views import CounselingSessionViewSet
 from enrollment.views import EnrollmentViewSet
 
 # Students app imports (moved from .views to students.views)
-from students.views import home, cache_test_view
+from students.views import home cache_test_view, StudentDashboardView
 from students.views import StudentProfileView 
 
 
