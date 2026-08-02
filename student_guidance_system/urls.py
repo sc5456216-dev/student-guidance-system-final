@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -36,6 +37,7 @@ router.register(r'enrollments', EnrollmentViewSet, basename='enrollment')
 urlpatterns = [
     # Home page – uses `views.home` from this directory
     path('', views.home, name='home'),
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
 
     # Django Admin
     path('admin/', admin.site.urls),
