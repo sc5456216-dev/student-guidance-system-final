@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ---------- SECURITY ----------
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-$2tigz)ri$izwq*ga%b+=xg#gfw4#6@#d)oy#*+1@)=2h3f(q7')
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['student-guidance-system-final.onrender.com', 'localhost', '127.0.0.1'] 
 
 # ---------- REDIS CONFIGURATION ----------
 # Ensure base URL has no trailing slash to prevent double-slash path errors
