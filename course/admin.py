@@ -8,9 +8,9 @@ class CourseBatchInline(admin.TabularInline):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('code', 'title', 'fee', 'is_active', 'is_deleted')
-    list_filter = ('is_active', 'is_deleted')
-    search_fields = ('code', 'title')
+    list_display = ['code', 'title', 'credits', 'is_active'] 
+    list_filter = ('is_active', 'credits')
+    search_fields = ('code', 'name')
     inlines = [CourseBatchInline]
 
     def get_queryset(self, request):
