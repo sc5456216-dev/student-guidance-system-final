@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.permissions import AllowAny
 from django.views.decorators.cache import cache_page
-from students.views import home, cache_test_view, StudentDashboardView
+from students.views import, cache_test_view, StudentDashboardView
 from django.urls import include
 
 # Authentication app imports
@@ -69,7 +69,6 @@ router.register(r'enrollments', EnrollmentViewSet, basename='enrollment')
 # ---------- URL Patterns ----------
 urlpatterns = [
     # Home page
-    path('', home, name='home'),
     path('', views.home, name='home'),
     # Django Admin
     path('admin/', admin.site.urls),
