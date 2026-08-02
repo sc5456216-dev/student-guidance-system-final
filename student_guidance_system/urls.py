@@ -53,7 +53,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from students.views import test_email_view
 from students.views import dashboard_page 
-
+from . import views   
 from notifications.views import NotificationSettingsView
 
 # ---------- Router Configuration ----------
@@ -70,7 +70,7 @@ router.register(r'enrollments', EnrollmentViewSet, basename='enrollment')
 urlpatterns = [
     # Home page
     path('', home, name='home'),
-    
+    path('', views.home, name='home'),
     # Django Admin
     path('admin/', admin.site.urls),
     
