@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Available Courses{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary">
+            <i class="fas fa-book-open"></i> Available Courses
+        </h1>
+        <p class="text-muted lead">Explore and enroll in courses that help you grow your skills.</p>
+    </div>
+
+    <div class="row g-4">
+        {% for course in courses %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-primary">{{ course.code }}</span>
+                        <span class="badge bg-success">Active</span>
+                    </div>
+                    <h5 class="card-title fw-bold">{{ course.title }}</h5>
+                    <p class="card-text text-muted small">{{ course.description|truncatewords:15 }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="text-muted small"><i class="fas fa-clock"></i> {{ course.duration_weeks|default:"8" }} weeks</span>
+                        <span class="text-muted small"><i class="fas fa-user-graduate"></i> {{ course.credits|default:"3" }} credits</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3">
+                    <a href="#" class="btn btn-outline-primary btn-sm w-100">
+                        <i class="fas fa-info-circle"></i> View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-book fa-3x text-muted mb-3 d-block"></i>
+            <p class="text-muted">No courses available at the moment.</p>
+            <p class="text-muted small">Check back later for new courses!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .badge {
+        font-weight: 500;
+        padding: 0.4em 0.8em;
+    }
+</style>
+{% endblock %}
