@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Notifications{% endblock %}
+{% block content %}
+<h1>Notifications</h1>
+<ul>
+    {% for notification in notifications %}
+        <li>{{ notification.message }} <small>({{ notification.created_at|date:"M d, Y H:i" }})</small></li>
+    {% empty %}
+        <li>No notifications.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'dashboard_page' %}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

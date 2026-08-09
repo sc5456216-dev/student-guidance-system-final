@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Assessments{% endblock %}
+{% block content %}
+<h1>My Assessments</h1>
+<ul>
+    {% for result in results %}
+        <li>{{ result.assessment.title }} – Score: {{ result.score }}%</li>
+    {% empty %}
+        <li>You haven't completed any assessments yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'dashboard_page' %}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

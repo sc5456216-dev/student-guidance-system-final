@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<h1>Messages</h1>
+<ul>
+    {% for message in messages %}
+        <li><strong>{{ message.sender }}</strong>: {{ message.content }} <small>({{ message.sent_at|date:"M d, Y H:i" }})</small></li>
+    {% empty %}
+        <li>No messages.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'dashboard_page' %}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

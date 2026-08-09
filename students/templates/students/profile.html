@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Profile</h1>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone|default:"Not provided" }}</p>
+        <p><strong>Role:</strong> {{ user.get_role_display }}</p>
+        {% if student_profile %}
+            <p><strong>Date of Birth:</strong> {{ student_profile.date_of_birth|default:"Not provided" }}</p>
+            <p><strong>Address:</strong> {{ student_profile.address|default:"Not provided" }}</p>
+            <p><strong>Guardian Name:</strong> {{ student_profile.guardian_name|default:"Not provided" }}</p>
+            <p><strong>Guardian Contact:</strong> {{ student_profile.guardian_contact|default:"Not provided" }}</p>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{% url 'dashboard_page' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}
